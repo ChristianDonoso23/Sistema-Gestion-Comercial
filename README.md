@@ -1,7 +1,7 @@
 
 # 💼 Sistema de Gestión Comercial para PYMEs – ITIN
 
-> Proyecto integrador final Aplicación de Tecnologías Web.
+> Proyecto Final de Aplicación de Tecnologías Web.
 
 ## 📌 Descripción
 

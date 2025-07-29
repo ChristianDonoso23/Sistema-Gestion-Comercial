@@ -1,1 +1,1 @@
-# Sistema-Gesti-n-Comercial
+# Sistema-Gestión-Comercial

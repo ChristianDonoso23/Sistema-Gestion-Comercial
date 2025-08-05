@@ -13,7 +13,7 @@ class ProductoDigital extends Producto
         ?int $id = null,
         string $nombre,
         string $descripcion,
-        string $precioUnitario,
+        float $precioUnitario,
         int $stock,
         int $idCategoria,
         string $urlDescarga,

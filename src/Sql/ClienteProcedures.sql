@@ -1,5 +1,5 @@
 -- ======================================
--- PROCEDIMIENTOS PARA CLIENTES
+-- PROCEDIMIENTOS PARA CLIENTES - CORREGIDO
 -- ======================================
 
 USE sistema_gestion_comercial;
@@ -10,7 +10,7 @@ DELIMITER $$
 CREATE OR REPLACE PROCEDURE sp_cliente_list()
 BEGIN
     SELECT 
-        c.id, c.email, c.telefono, c.direccion,
+        c.id AS cliente_id, c.email, c.telefono, c.direccion,
         pn.nombre, pn.apellido, pn.cedula,
         pj.razonSocial, pj.ruc, pj.representanteLegal
     FROM Cliente c
@@ -22,7 +22,7 @@ END$$
 CREATE OR REPLACE PROCEDURE sp_find_cliente(IN p_id INT)
 BEGIN
     SELECT 
-        c.id, c.email, c.telefono, c.direccion,
+        c.id AS cliente_id, c.email, c.telefono, c.direccion,
         pn.nombre, pn.apellido, pn.cedula,
         pj.razonSocial, pj.ruc, pj.representanteLegal
     FROM Cliente c
@@ -31,68 +31,8 @@ BEGIN
     WHERE c.id = p_id;
 END$$
 
--- Crea un nuevo Cliente y su detalle en PersonaNatural (transacción para integridad)
-CREATE OR REPLACE PROCEDURE sp_create_persona_natural(
-    IN p_email VARCHAR(100),
-    IN p_telefono VARCHAR(15),
-    IN p_direccion VARCHAR(255),
-    IN p_nombre VARCHAR(100),
-    IN p_apellido VARCHAR(100),
-    IN p_cedula VARCHAR(20)
-)
-BEGIN
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION
-    BEGIN
-        ROLLBACK; -- Revierte en caso de error
-    END;
-
-    START TRANSACTION;
-
-    INSERT INTO Cliente(email, telefono, direccion) 
-    VALUES (p_email, p_telefono, p_direccion);
-
-    SET @new_id = LAST_INSERT_ID();
-
-    INSERT INTO PersonaNatural(cliente_id, nombre, apellido, cedula)
-    VALUES (@new_id, p_nombre, p_apellido, p_cedula);
-
-    COMMIT;
-
-    SELECT @new_id AS cliente_id;
-END$$
-
--- Crea un nuevo Cliente y su detalle en PersonaJuridica (transacción para integridad)
-CREATE OR REPLACE PROCEDURE sp_create_persona_juridica(
-    IN p_email VARCHAR(100),
-    IN p_telefono VARCHAR(15),
-    IN p_direccion VARCHAR(255),
-    IN p_razonSocial VARCHAR(100),
-    IN p_ruc VARCHAR(20),
-    IN p_representanteLegal VARCHAR(100)
-)
-BEGIN
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION
-    BEGIN
-        ROLLBACK; -- Revierte en caso de error
-    END;
-
-    START TRANSACTION;
-
-    INSERT INTO Cliente(email, telefono, direccion)
-    VALUES (p_email, p_telefono, p_direccion);
-
-    SET @new_id = LAST_INSERT_ID();
-
-    INSERT INTO PersonaJuridica(cliente_id, razonSocial, ruc, representanteLegal)
-    VALUES (@new_id, p_razonSocial, p_ruc, p_representanteLegal);
-
-    COMMIT;
-
-    SELECT @new_id AS cliente_id;
-END$$
-
 -- Actualiza un Cliente y su detalle en PersonaNatural (transacción para integridad)
-CREATE OR REPLACE PROCEDURE sp_update_persona_natural(
+CREATE OR REPLACE PROCEDURE sp_persona_natural_update(
     IN p_id INT,
     IN p_email VARCHAR(100),
     IN p_telefono VARCHAR(15),
@@ -125,7 +65,7 @@ BEGIN
 END$$
 
 -- Actualiza un Cliente y su detalle en PersonaJuridica (transacción para integridad)
-CREATE OR REPLACE PROCEDURE sp_update_persona_juridica(
+CREATE OR REPLACE PROCEDURE sp_persona_juridica_update(
     IN p_id INT,
     IN p_email VARCHAR(100),
     IN p_telefono VARCHAR(15),
@@ -164,4 +104,3 @@ BEGIN
 END$$
 
 DELIMITER ;
-

@@ -9,7 +9,7 @@ abstract class Producto
     protected int $id;
     protected string $nombre;
     protected string $descripcion;
-    protected string $precioUnitario;
+    protected float $precioUnitario;
     protected int $stock;
     protected int $idCategoria;
 
@@ -17,7 +17,7 @@ abstract class Producto
         ?int $id = null,
         string $nombre,
         string $descripcion,
-        string $precioUnitario,
+        float $precioUnitario,
         int $stock,
         int $idCategoria
     )
@@ -33,14 +33,14 @@ abstract class Producto
     public function getId(): int {return $this->id;}
     public function getNombre(): string {return $this->nombre;}
     public function getDescripcion(): string {return $this->descripcion;}
-    public function getPrecioUnitario(): string {return $this->precioUnitario;}
+    public function getPrecioUnitario(): float {return $this->precioUnitario;}
     public function getStock(): int {return $this->stock;}
     public function getIdCategoria(): int {return $this->idCategoria;}
     /* Setters */
     public function setId(int $id): void {$this->id = $id;}
     public function setNombre(string $nombre): void {$this->nombre = $nombre;}
     public function setDescripcion(string $descripcion): void {$this->descripcion = $descripcion;}
-    public function setPrecioUnitario(string $precioUnitario): void {$this->precioUnitario = $precioUnitario;}
+    public function setPrecioUnitario(float $precioUnitario): void {$this->precioUnitario = $precioUnitario;}
     public function setStock(int $stock): void {$this->stock = $stock;}
     public function setIdCategoria(int $idCategoria): void {$this->idCategoria = $idCategoria;}
     

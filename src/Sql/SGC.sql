@@ -1,3 +1,4 @@
+-- Active: 1752793183249@@127.0.0.1@3306@sistema_gestion_comercial
 CREATE DATABASE Sistema_Gestion_Comercial
     DEFAULT CHARACTER SET = 'utf8mb4';
 

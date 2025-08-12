@@ -37,11 +37,7 @@ class DetalleVentaRepository implements RepositoryInterface
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $stmt->closeCursor();
 
-            $detalles = [];
-            foreach ($rows as $row) {
-                $detalles[] = $this->hydrate($row);
-            }
-            return $detalles;
+            return array_map(fn($row) => $this->hydrate($row), $rows);
         } catch (\Exception $e) {
             error_log("Error en findAll DetalleVentaRepository: " . $e->getMessage());
             return [];
@@ -50,9 +46,6 @@ class DetalleVentaRepository implements RepositoryInterface
 
     public function findById(int $id): ?DetalleVenta
     {
-        // Para DetalleVenta el ID es compuesto (idVenta, lineNumber)
-        // Aquí se puede ajustar la firma para usar array o modificar interfaz
-        // Para simplicidad, no implementado findById simple
         throw new \LogicException("Use findByCompositeId para DetalleVenta");
     }
 

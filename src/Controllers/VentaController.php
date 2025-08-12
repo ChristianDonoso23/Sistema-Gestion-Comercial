@@ -57,11 +57,12 @@ class VentaController
                         $estado = 'borrador';
                     }
 
+                    // NO usar total, se calcula en BD
                     $venta = new Venta(
                         null,
                         new \DateTime($payload['fecha'] ?? 'now'),
                         (int)($payload['idCliente'] ?? 0),
-                        (float)($payload['total'] ?? 0),
+                        0.0,  // total fijo en 0 para que lo calcule BD
                         $estado
                     );
 
@@ -84,7 +85,7 @@ class VentaController
                         return;
                     }
 
-                    // Validar y limpiar el estado si viene en el payload
+                    // Validar y limpiar estado
                     if (isset($payload['estado'])) {
                         $estado = trim($payload['estado']);
                         if (empty($estado)) {
@@ -96,7 +97,7 @@ class VentaController
 
                     $existingVenta->setFecha(new \DateTime($payload['fecha'] ?? $existingVenta->getFecha()->format('Y-m-d')));
                     $existingVenta->setIdCliente((int)($payload['idCliente'] ?? $existingVenta->getIdCliente()));
-                    $existingVenta->setTotal((float)($payload['total'] ?? $existingVenta->getTotal()));
+                    // NO actualizar total aquí, lo calcula BD
                     $existingVenta->setEstado($estado);
 
                     $success = $this->ventaRepository->update($existingVenta);

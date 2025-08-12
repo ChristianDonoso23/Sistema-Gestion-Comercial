@@ -20,12 +20,12 @@ class VentaRepository implements RepositoryInterface
 
     private function hydrate(array $row): Venta
     {
-        // Manejar el estado vacío del ENUM
+        // Manejar estado vacío para no tener valores nulos
         $estado = trim($row['estado'] ?? '');
         if (empty($estado)) {
-            $estado = 'borrador'; // Valor por defecto
+            $estado = 'borrador';
         }
-        
+
         return new Venta(
             (int)$row['id'],
             new \DateTime($row['fecha']),
@@ -76,10 +76,9 @@ class VentaRepository implements RepositoryInterface
 
         try {
             $stmt = $this->db->prepare(
-                "CALL sp_create_venta(?, ?, ?, ?)"
+                "CALL sp_create_venta(?, ?, ?)"
             );
 
-            // Asegurar que el estado no esté vacío
             $estado = trim($entity->getEstado());
             if (empty($estado)) {
                 $estado = 'borrador';
@@ -88,7 +87,6 @@ class VentaRepository implements RepositoryInterface
             $params = [
                 $entity->getFecha()->format('Y-m-d'),
                 $entity->getIdCliente(),
-                $entity->getTotal(),
                 $estado
             ];
 
@@ -98,9 +96,15 @@ class VentaRepository implements RepositoryInterface
 
             if ($result && isset($result['venta_id'])) {
                 $reflection = new \ReflectionClass($entity);
-                $prop = $reflection->getProperty('id');
-                $prop->setAccessible(true);
-                $prop->setValue($entity, (int)$result['venta_id']);
+                
+                $propId = $reflection->getProperty('id');
+                $propId->setAccessible(true);
+                $propId->setValue($entity, (int)$result['venta_id']);
+
+                $propTotal = $reflection->getProperty('total');
+                $propTotal->setAccessible(true);
+                $propTotal->setValue($entity, (float)$result['total']);
+
                 return true;
             }
 
@@ -119,10 +123,9 @@ class VentaRepository implements RepositoryInterface
 
         try {
             $stmt = $this->db->prepare(
-                "CALL sp_update_venta(?, ?, ?, ?, ?)"
+                "CALL sp_update_venta(?, ?, ?, ?)"
             );
 
-            // Asegurar que el estado no esté vacío
             $estado = trim($entity->getEstado());
             if (empty($estado)) {
                 $estado = 'borrador';
@@ -131,7 +134,6 @@ class VentaRepository implements RepositoryInterface
             $params = [
                 $entity->getId(),
                 $entity->getFecha()->format('Y-m-d'),
-                $entity->getTotal(),
                 $entity->getIdCliente(),
                 $estado
             ];

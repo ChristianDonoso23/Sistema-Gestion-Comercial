@@ -5,15 +5,18 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Repositories\DetalleVentaRepository;
+use App\Repositories\ProductoRepository;
 use App\Entities\DetalleVenta;
 
 class DetalleVentaController
 {
     private DetalleVentaRepository $detalleVentaRepository;
+    private ProductoRepository $productoRepository;
 
     public function __construct()
     {
         $this->detalleVentaRepository = new DetalleVentaRepository();
+        $this->productoRepository = new ProductoRepository();
     }
 
     private function detalleVentaToArray(DetalleVenta $detalle): array
@@ -52,13 +55,24 @@ class DetalleVentaController
                         throw new \InvalidArgumentException('Payload JSON inválido');
                     }
 
+                    $producto = $this->productoRepository->findById((int)($payload['idProducto'] ?? 0));
+                    if (!$producto) {
+                        http_response_code(400);
+                        echo json_encode(['error' => 'Producto no existe']);
+                        return;
+                    }
+
+                    $cantidad = (int)($payload['cantidad'] ?? 0);
+                    $precioUnitario = $producto->getPrecioUnitario();
+                    $subtotal = $precioUnitario * $cantidad;
+
                     $detalle = new DetalleVenta(
                         (int)($payload['idVenta'] ?? 0),
                         (int)($payload['lineNumber'] ?? 0),
                         (int)($payload['idProducto'] ?? 0),
-                        (int)($payload['cantidad'] ?? 0),
-                        (float)($payload['precioUnitario'] ?? 0),
-                        (float)($payload['subtotal'] ?? 0)
+                        $cantidad,
+                        $precioUnitario,
+                        $subtotal
                     );
 
                     $success = $this->detalleVentaRepository->create($detalle);
@@ -80,10 +94,23 @@ class DetalleVentaController
                         return;
                     }
 
-                    $existingDetalle->setIdProducto((int)($payload['idProducto'] ?? $existingDetalle->getIdProducto()));
-                    $existingDetalle->setCantidad((int)($payload['cantidad'] ?? $existingDetalle->getCantidad()));
-                    $existingDetalle->setPrecioUnitario((float)($payload['precioUnitario'] ?? $existingDetalle->getPrecioUnitario()));
-                    $existingDetalle->setSubtotal((float)($payload['subtotal'] ?? $existingDetalle->getSubtotal()));
+                    $newIdProducto = isset($payload['idProducto']) ? (int)$payload['idProducto'] : $existingDetalle->getIdProducto();
+                    $newCantidad = isset($payload['cantidad']) ? (int)$payload['cantidad'] : $existingDetalle->getCantidad();
+
+                    $producto = $this->productoRepository->findById($newIdProducto);
+                    if (!$producto) {
+                        http_response_code(400);
+                        echo json_encode(['error' => 'Producto no existe']);
+                        return;
+                    }
+
+                    $precioUnitario = $producto->getPrecioUnitario();
+                    $subtotal = $precioUnitario * $newCantidad;
+
+                    $existingDetalle->setIdProducto($newIdProducto);
+                    $existingDetalle->setCantidad($newCantidad);
+                    $existingDetalle->setPrecioUnitario($precioUnitario);
+                    $existingDetalle->setSubtotal($subtotal);
 
                     $success = $this->detalleVentaRepository->update($existingDetalle);
                     echo json_encode(['success' => $success]);

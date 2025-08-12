@@ -1,10 +1,20 @@
 DELIMITER $$
 
--- CREAR VENTA
+-- Procedimiento para calcular el total de una venta sumando subtotales de DetalleVenta
+CREATE OR REPLACE PROCEDURE sp_calcular_total_venta(
+    IN p_idVenta INT,
+    OUT p_total DECIMAL(10,2)
+)
+BEGIN
+    SELECT IFNULL(SUM(subtotal), 0) INTO p_total
+    FROM DetalleVenta
+    WHERE idVenta = p_idVenta;
+END$$
+
+-- Crear Venta sin total (se calcula internamente)
 CREATE OR REPLACE PROCEDURE sp_create_venta(
     IN p_fecha DATE,
     IN p_idCliente INT,
-    IN p_total DECIMAL(10,2),
     IN p_estado VARCHAR(20)
 )
 BEGIN
@@ -17,26 +27,28 @@ BEGIN
     START TRANSACTION;
 
     INSERT INTO Venta(fecha, idCliente, total, estado)
-    VALUES (p_fecha, p_idCliente, p_total, p_estado);
+    VALUES (p_fecha, p_idCliente, 0, p_estado);
 
     SET @new_id = LAST_INSERT_ID();
 
+    CALL sp_calcular_total_venta(@new_id, @total_calculado);
+
+    UPDATE Venta SET total = @total_calculado WHERE id = @new_id;
+
     COMMIT;
 
-    -- Devolver el registro completo recién creado
     SELECT 
         @new_id AS venta_id,
         p_fecha AS fecha,
         p_idCliente AS idCliente,
-        p_total AS total,
+        @total_calculado AS total,
         p_estado AS estado;
 END$$
 
--- ACTUALIZAR VENTA
+-- Actualizar Venta sin total (se recalcula)
 CREATE OR REPLACE PROCEDURE sp_update_venta(
     IN p_id INT,
     IN p_fecha DATE,
-    IN p_total DECIMAL(10,2),
     IN p_idCliente INT,
     IN p_estado VARCHAR(20)
 )
@@ -52,29 +64,31 @@ BEGIN
     UPDATE Venta
     SET fecha = p_fecha,
         idCliente = p_idCliente,
-        total = p_total,
         estado = p_estado
     WHERE id = p_id;
 
+    CALL sp_calcular_total_venta(p_id, @total_calculado);
+
+    UPDATE Venta SET total = @total_calculado WHERE id = p_id;
+
     COMMIT;
-    
-    -- Verificar que se actualizó correctamente
+
     SELECT ROW_COUNT() AS affected_rows;
 END$$
 
--- ELIMINAR VENTA
+-- Eliminar Venta
 CREATE OR REPLACE PROCEDURE sp_delete_venta(IN p_id INT)
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
         RESIGNAL;
     END;
-    
+
     DELETE FROM Venta WHERE id = p_id;
     SELECT ROW_COUNT() AS affected_rows;
 END$$
 
--- LISTAR TODAS LAS VENTAS
+-- Listar todas las Ventas
 CREATE OR REPLACE PROCEDURE sp_venta_list()
 BEGIN
     SELECT 
@@ -87,7 +101,7 @@ BEGIN
     ORDER BY id DESC;
 END$$
 
--- BUSCAR VENTA POR ID
+-- Buscar Venta por ID
 CREATE OR REPLACE PROCEDURE sp_find_venta(IN p_id INT)
 BEGIN
     SELECT 
@@ -102,4 +116,5 @@ END$$
 
 DELIMITER ;
 
+-- Reiniciar AUTO_INCREMENT si lo necesitas
 ALTER TABLE Venta AUTO_INCREMENT = 1;

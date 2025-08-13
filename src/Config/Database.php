@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Config;
 
@@ -18,6 +16,7 @@ class Database
             $username   = 'root';
             $password   = '';
             $charset    = 'utf8mb4';
+
             $dns = "mysql:host={$host};dbname={$dbname};charset={$charset}";
             $option = [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Entities;
 
@@ -17,10 +15,12 @@ class Permiso
         $this->id = $id ?? 0;
         $this->codigo = $codigo;
     }
+
     /*Getters*/
-    public function getId(): int { return $this->id; }
-    public function getCodigo(): string { return $this->codigo; }
+    public function getId(): int          { return $this->id; }
+    public function getCodigo(): string   { return $this->codigo; }
+
     /*Setters*/
-    public function setId(int $id): void { $this->id = $id; }
-    public function setCodigo(string $codigo): void { $this->codigo = $codigo; }
+    public function setId(int $id): void              { $this->id = $id; }
+    public function setCodigo(string $codigo): void   { $this->codigo = $codigo; }
 }

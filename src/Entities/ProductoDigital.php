@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Entities;
 
@@ -23,10 +21,12 @@ class ProductoDigital extends Producto
         $this->urlDescarga = $urlDescarga;
         $this->licencia = $licencia;
     }
+
     /* Getters */
-    public function getUrlDescarga(): string { return $this->urlDescarga; }
-    public function getLicencia(): string { return $this->licencia; }
+    public function getUrlDescarga(): string   { return $this->urlDescarga; }
+    public function getLicencia(): string      { return $this->licencia; }
+
     /* Setters */
-    public function setUrlDescarga(string $urlDescarga): void { $this->urlDescarga = $urlDescarga; }
-    public function setLicencia(string $licencia): void { $this->licencia = $licencia; }
+    public function setUrlDescarga(string $urlDescarga): void   { $this->urlDescarga = $urlDescarga; }
+    public function setLicencia(string $licencia): void         { $this->licencia = $licencia; }
 }

@@ -17,10 +17,12 @@ class RolPermiso
         $this->idRol = $idRol;
         $this->idPermiso = $idPermiso;
     }
+
     /*Getters*/
-    public function getIdRol(): int { return $this->idRol; }
-    public function getIdPermiso(): int { return $this->idPermiso; }
+    public function getIdRol(): int       { return $this->idRol; }
+    public function getIdPermiso(): int   { return $this->idPermiso; }
+
     /*Setters*/
-    public function setIdRol(int $idRol): void { $this->idRol = $idRol; }
-    public function setIdPermiso(int $idPermiso): void { $this->idPermiso = $idPermiso; }
+    public function setIdRol(int $idRol): void           { $this->idRol = $idRol; }
+    public function setIdPermiso(int $idPermiso): void   { $this->idPermiso = $idPermiso; }
 }

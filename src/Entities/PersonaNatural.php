@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Entities;
 
@@ -24,12 +22,13 @@ class PersonaNatural extends Cliente
         $this->apellido = $apellido;
         $this->cedula = $cedula;
     }
+
     /*Getters*/
-    public function getNombre(): string { return $this->nombre; }
-    public function getApellido(): string { return $this->apellido; }
-    public function getCedula(): string { return $this->cedula; }
+    public function getNombre(): string     { return $this->nombre; }
+    public function getApellido(): string   { return $this->apellido; }
+    public function getCedula(): string     { return $this->cedula; }
     /*Setters*/
-    public function setNombre(string $nombre): void { $this->nombre = $nombre; }
-    public function setApellido(string $apellido): void { $this->apellido = $apellido; }
-    public function setCedula(string $cedula): void { $this->cedula = $cedula; }
+    public function setNombre(string $nombre): void       { $this->nombre = $nombre; }
+    public function setApellido(string $apellido): void   { $this->apellido = $apellido; }
+    public function setCedula(string $cedula): void       { $this->cedula = $cedula; }
 }

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Entities;
 
@@ -29,19 +27,21 @@ abstract class Producto
         $this->stock = $stock;
         $this->idCategoria = $idCategoria;
     }
+
     /* Getters */
-    public function getId(): int {return $this->id;}
-    public function getNombre(): string {return $this->nombre;}
-    public function getDescripcion(): string {return $this->descripcion;}
-    public function getPrecioUnitario(): float {return $this->precioUnitario;}
-    public function getStock(): int {return $this->stock;}
-    public function getIdCategoria(): int {return $this->idCategoria;}
+    public function getId(): int                 {return $this->id;}
+    public function getNombre(): string          {return $this->nombre;}
+    public function getDescripcion(): string     {return $this->descripcion;}
+    public function getPrecioUnitario(): float   {return $this->precioUnitario;}
+    public function getStock(): int              {return $this->stock;}
+    public function getIdCategoria(): int        {return $this->idCategoria;}
+    
     /* Setters */
-    public function setId(int $id): void {$this->id = $id;}
-    public function setNombre(string $nombre): void {$this->nombre = $nombre;}
-    public function setDescripcion(string $descripcion): void {$this->descripcion = $descripcion;}
-    public function setPrecioUnitario(float $precioUnitario): void {$this->precioUnitario = $precioUnitario;}
-    public function setStock(int $stock): void {$this->stock = $stock;}
-    public function setIdCategoria(int $idCategoria): void {$this->idCategoria = $idCategoria;}
+    public function setId(int $id): void                             {$this->id = $id;}
+    public function setNombre(string $nombre): void                  {$this->nombre = $nombre;}
+    public function setDescripcion(string $descripcion): void        {$this->descripcion = $descripcion;}
+    public function setPrecioUnitario(float $precioUnitario): void   {$this->precioUnitario = $precioUnitario;}
+    public function setStock(int $stock): void                       {$this->stock = $stock;}
+    public function setIdCategoria(int $idCategoria): void           {$this->idCategoria = $idCategoria;}
     
 }

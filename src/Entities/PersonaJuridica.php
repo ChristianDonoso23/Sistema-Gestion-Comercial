@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Entities;
 
@@ -26,12 +24,12 @@ class PersonaJuridica extends Cliente
     }
 
     /*Getters*/
-    public function getRazonSocial(): string { return $this->razonSocial; }
-    public function getRuc(): string { return $this->ruc; }
-    public function getRepresentanteLegal(): string { return $this->representanteLegal; }
+    public function getRazonSocial(): string          { return $this->razonSocial; }
+    public function getRuc(): string                  { return $this->ruc; }
+    public function getRepresentanteLegal(): string   { return $this->representanteLegal; }
 
     /*Setters*/
-    public function setRazonSocial(string $razonSocial): void { $this->razonSocial = $razonSocial; }
-    public function setRuc(string $ruc): void { $this->ruc = $ruc; }
-    public function setRepresentanteLegal(string $representanteLegal): void { $this->representanteLegal = $representanteLegal; }
+    public function setRazonSocial(string $razonSocial): void                 { $this->razonSocial = $razonSocial; }
+    public function setRuc(string $ruc): void                                 { $this->ruc = $ruc; }
+    public function setRepresentanteLegal(string $representanteLegal): void   { $this->representanteLegal = $representanteLegal; }
 }

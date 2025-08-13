@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Entities;
 
@@ -28,19 +26,20 @@ class DetalleVenta
         $this->precioUnitario = $precioUnitario;
         $this->subtotal = $subtotal;
     }
+
     /* Getters */
-    public function getIdVenta(): int { return $this->idVenta; }
-    public function getLineNumber(): int { return $this->lineNumber; }
-    public function getIdProducto(): int { return $this->idProducto; }
-    public function getCantidad(): int { return $this->cantidad; }
-    public function getPrecioUnitario(): float { return $this->precioUnitario; }
-    public function getSubtotal(): float { return $this->subtotal; }
+    public function getIdVenta(): int            { return $this->idVenta; }
+    public function getLineNumber(): int         { return $this->lineNumber; }
+    public function getIdProducto(): int         { return $this->idProducto; }
+    public function getCantidad(): int           { return $this->cantidad; }
+    public function getPrecioUnitario(): float   { return $this->precioUnitario; }
+    public function getSubtotal(): float         { return $this->subtotal; }
     /* Setters */
-    public function setIdVenta(int $idVenta): void { $this->idVenta = $idVenta; }
-    public function setLineNumber(int $lineNumber): void { $this->lineNumber = $lineNumber; }
-    public function setIdProducto(int $idProducto): void { $this->idProducto = $idProducto; }
-    public function setCantidad(int $cantidad): void { $this->cantidad = $cantidad; }
-    public function setPrecioUnitario(float $precioUnitario): void { $this->precioUnitario = $precioUnitario; }
-    public function setSubtotal(float $subtotal): void { $this->subtotal = $subtotal; }
+    public function setIdVenta(int $idVenta): void                    { $this->idVenta = $idVenta; }
+    public function setLineNumber(int $lineNumber): void              { $this->lineNumber = $lineNumber; }
+    public function setIdProducto(int $idProducto): void              { $this->idProducto = $idProducto; }
+    public function setCantidad(int $cantidad): void                  { $this->cantidad = $cantidad; }
+    public function setPrecioUnitario(float $precioUnitario): void    { $this->precioUnitario = $precioUnitario; }
+    public function setSubtotal(float $subtotal): void                { $this->subtotal = $subtotal; }
 
 }

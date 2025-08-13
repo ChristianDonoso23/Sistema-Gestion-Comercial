@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Entities;
 
@@ -29,14 +27,15 @@ class ProductoFisico extends Producto
         $this->ancho = $ancho;
         $this->profundidad = $profundidad;
     }
+
     /* Getters */
-    public function getPeso(): float { return $this->peso; }
-    public function getAlto(): float { return $this->alto; }
-    public function getAncho(): float { return $this->ancho; }
-    public function getProfundidad(): float { return $this->profundidad; }
+    public function getPeso(): float          { return $this->peso; }
+    public function getAlto(): float          { return $this->alto; }
+    public function getAncho(): float         { return $this->ancho; }
+    public function getProfundidad(): float   { return $this->profundidad; }
     /* Setters */
-    public function setPeso(float $peso): void { $this->peso = $peso; }
-    public function setAlto(float $alto): void { $this->alto = $alto; }
-    public function setAncho(float $ancho): void { $this->ancho = $ancho; }
-    public function setProfundidad(float $profundidad): void { $this->profundidad = $profundidad; }
+    public function setPeso(float $peso): void                 { $this->peso = $peso; }
+    public function setAlto(float $alto): void                 { $this->alto = $alto; }
+    public function setAncho(float $ancho): void               { $this->ancho = $ancho; }
+    public function setProfundidad(float $profundidad): void   { $this->profundidad = $profundidad; }
 }

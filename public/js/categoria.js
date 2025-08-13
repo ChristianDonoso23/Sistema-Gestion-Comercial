@@ -15,7 +15,7 @@ const createCategoriesPanel = () => {
         model: "App.model.Categoria",
         proxy: {
             type: "rest",
-            url: "/api/categoria.php",
+            url: "/Api/categoria.php",
             reader: { type: "json", rootProperty: '' },
             writer: { type: "json", rootProperty: '', writeAllFields: true },
             appendId: false

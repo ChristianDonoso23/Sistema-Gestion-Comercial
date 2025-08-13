@@ -12,7 +12,7 @@ const createPermissionPanel = () => {
         model: "App.model.Permiso",
         proxy: {
             type: "rest",
-            url: "/api/permiso.php",
+            url: "/Api/permiso.php",
             reader: { type: "json", rootProperty: '' },
             writer: { type: "json", rootProperty: '', writeAllFields: true },
             appendId: false

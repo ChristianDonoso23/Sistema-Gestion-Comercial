@@ -12,7 +12,7 @@ const createDigitalProductPanel = () => {
         model: "App.model.DigitalProduct",
         proxy: {
             type: "rest",
-            url: "/api/productoDigital.php",
+            url: "/Api/productoDigital.php",
             reader: { type: "json", rootProperty: '' },
             writer: { type: 'json', rootProperty: '', writeAllFields: true },
             appendId: false

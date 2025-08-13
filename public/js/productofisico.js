@@ -14,7 +14,7 @@ const createPhysicalProductPanel = () => {
         model: "App.model.PhysicalProduct",
         proxy: {
             type: "rest",
-            url: "/api/productoFisico.php",
+            url: "/Api/productoFisico.php",
             reader: { type: "json", rootProperty: '' },
             writer: { type: 'json', rootProperty: '', writeAllFields: true },
             appendId: false

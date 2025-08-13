@@ -17,7 +17,7 @@ const createNaturalPersonPanel = () => {
         model: "App.model.NaturalPerson",
         proxy: {
             type: "rest",
-            url: "/api/personanatural.php",
+            url: "/Api/personanatural.php",
             reader: { type: "json", rootProperty: '' },
             writer: { type: 'json', rootProperty: '', writeAllFields: true },
             appendId: false

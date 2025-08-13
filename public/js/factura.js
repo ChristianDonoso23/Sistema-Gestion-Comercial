@@ -16,7 +16,7 @@ const createBillPanel = () => {
         model: "App.model.Factura",
         proxy: {
             type: "rest",
-            url: "/api/factura.php",
+            url: "/Api/factura.php",
             reader: { type: "json", rootProperty: '' },
             writer: { type: "json", rootProperty: '', writeAllFields: true },
             appendId: false

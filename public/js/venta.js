@@ -15,7 +15,7 @@ const createSalesPanel = () => {
         model: "App.model.Venta",
         proxy: {
             type: "rest",
-            url: "/api/venta.php",
+            url: "/Api/venta.php",
             reader: { type: "json", rootProperty: '' },
             writer: { type: 'json', rootProperty: '', writeAllFields: true },
             appendId: false

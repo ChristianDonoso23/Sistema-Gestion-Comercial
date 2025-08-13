@@ -15,7 +15,7 @@ const createUsersPanel = () => {
         model: "App.model.Usuario",
         proxy: {
             type: "rest",
-            url: "/api/usuario.php",
+            url: "/Api/usuario.php",
             reader: { type: "json", rootProperty: '' },
             writer: { type: 'json', rootProperty: '', writeAllFields: true },
             appendId: false

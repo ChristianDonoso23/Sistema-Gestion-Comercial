@@ -17,7 +17,7 @@ const createLegalPersonPanel = () => {
         model: "App.model.PersonaJuridica",
         proxy: {
             type: "rest",
-            url: "/api/personajuridica.php",
+            url: "/Api/personajuridica.php",
             reader: { type: "json", rootProperty: '' },
             writer: { type: "json", rootProperty: '', writeAllFields: true },
             appendId: false

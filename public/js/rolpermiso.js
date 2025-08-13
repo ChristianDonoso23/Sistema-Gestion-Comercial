@@ -12,7 +12,7 @@ const createRolPermissionPanel = () => {
         model: "App.model.RolPermiso",
         proxy: {
             type: "rest",
-            url: "/api/rolpermiso.php",
+            url: "/Api/rolpermiso.php",
             reader: { type: 'json', rootProperty: '' },
             writer: { type: 'json', rootProperty: '', writeAllFields: true },
             appendId: false

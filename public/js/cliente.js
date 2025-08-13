@@ -24,7 +24,7 @@ const createClientsPanel = () => {
         model: "App.model.Cliente",
         proxy: {
             type: "rest",
-            url: "/api/cliente.php",
+            url: "/Api/cliente.php",
             reader: { type: "json", rootProperty: '' },
             writer: { type: "json", rootProperty: '', writeAllFields: true },
             appendId: false

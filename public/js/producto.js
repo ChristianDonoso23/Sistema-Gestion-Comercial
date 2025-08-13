@@ -16,7 +16,7 @@ const createProductPanel = () => {
         model: "App.model.Product",
         proxy: {
             type: "rest",
-            url: "/api/producto.php",
+            url: "/Api/producto.php",
             reader: { type: "json", rootProperty: '' },
             writer: { type: 'json', rootProperty: '', writeAllFields: true },
             appendId: false

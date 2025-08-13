@@ -30,14 +30,16 @@ const createRolPanel = () => {
             {
                 text: "ID",
                 flex: 1,
-                sortable: true,
+                sortable: false,
+                hideable: false,
                 dataIndex: "id",
                 align: "center"
             },
             {
                 text: "Nombre",
                 flex: 1,
-                sortable: true,
+                sortable: false,
+                hideable: false,
                 dataIndex: "nombre",
                 align: "center"
             }

@@ -16,12 +16,12 @@ const createSalesPanel = () => {
         proxy: {
             type: "rest",
             url: "/Api/venta.php",
-            reader: { type: "json", rootProperty: '' },
-            writer: { type: 'json', rootProperty: '', writeAllFields: true },
+            reader: { type: "json", rootProperty: "" },
+            writer: { type: "json", rootProperty: "", writeAllFields: true },
             appendId: false
         },
         autoLoad: true,
-        autoSync: false,
+        autoSync: false
     });
 
     const grid = Ext.create("Ext.grid.Panel", {
@@ -30,11 +30,45 @@ const createSalesPanel = () => {
         itemId: "salesPanel",
         layout: "fit",
         columns: [
-            { text: "ID", width: 50, dataIndex: "id" },
-            { text: "Fecha", dataIndex: "fecha", flex: 1, xtype: 'datecolumn', format: 'Y-m-d' },
-            { text: "IDcliente", width: 100, dataIndex: "idCliente" },
-            { text: "Total", flex: 1, dataIndex: "total", xtype: "numbercolumn", format: "0.00" },
-            { text: "Estado", flex: 1, dataIndex: "estado" }
+            { 
+                text: "ID", 
+                width: 50, 
+                sortable: false, 
+                hideable: false, 
+                dataIndex: "id" 
+            },
+            { 
+                text: "Fecha", 
+                flex: 1, 
+                sortable: false, 
+                hideable: false, 
+                dataIndex: "fecha", 
+                xtype: "datecolumn", 
+                format: "Y-m-d" 
+            },
+            { 
+                text: "ID Cliente", 
+                width: 100, 
+                sortable: false, 
+                hideable: false, 
+                dataIndex: "idCliente" 
+            },
+            { 
+                text: "Total", 
+                flex: 1, 
+                sortable: false, 
+                hideable: false, 
+                dataIndex: "total", 
+                xtype: "numbercolumn", 
+                format: "0.00" 
+            },
+            { 
+                text: "Estado", 
+                flex: 1, 
+                sortable: false, 
+                hideable: false, 
+                dataIndex: "estado" 
+            }
         ]
     });
 

@@ -13,8 +13,8 @@ const createPermissionPanel = () => {
         proxy: {
             type: "rest",
             url: "/Api/permiso.php",
-            reader: { type: "json", rootProperty: '' },
-            writer: { type: "json", rootProperty: '', writeAllFields: true },
+            reader: { type: "json", rootProperty: "" },
+            writer: { type: "json", rootProperty: "", writeAllFields: true },
             appendId: false
         },
         autoLoad: true,
@@ -27,8 +27,22 @@ const createPermissionPanel = () => {
         itemId: "permisoPanel",
         layout: "fit",
         columns: [
-            { text: "ID", dataIndex: "id", flex: 1, align: "center" },
-            { text: "Código", dataIndex: "codigo", flex: 1, align: "center" }
+            { 
+                text: "ID", 
+                flex: 1, 
+                sortable: false, 
+                hideable: false, 
+                dataIndex: "id", 
+                align: "center" 
+            },
+            { 
+                text: "Código", 
+                flex: 1, 
+                sortable: false, 
+                hideable: false, 
+                dataIndex: "codigo", 
+                align: "center" 
+            }
         ]
     });
 

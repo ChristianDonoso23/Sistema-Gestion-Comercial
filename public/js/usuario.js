@@ -6,7 +6,6 @@ const createUsersPanel = () => {
             { name: "username", type: "string" },
             { name: "passwordHash", type: "string" },
             { name: "estado", type: "string" },
-            { name: "rolNombre", type: "string" } // opcional: mostrar el rol del usuario
         ]
     });
 
@@ -16,12 +15,12 @@ const createUsersPanel = () => {
         proxy: {
             type: "rest",
             url: "/Api/usuario.php",
-            reader: { type: "json", rootProperty: '' },
-            writer: { type: 'json', rootProperty: '', writeAllFields: true },
+            reader: { type: "json", rootProperty: "" },
+            writer: { type: "json", rootProperty: "", writeAllFields: true },
             appendId: false
         },
         autoLoad: true,
-        autoSync: false,
+        autoSync: false
     });
 
     const grid = Ext.create("Ext.grid.Panel", {
@@ -30,10 +29,34 @@ const createUsersPanel = () => {
         itemId: "usersPanel",
         layout: "fit",
         columns: [
-            { text: "ID", width: 50, dataIndex: "id" },
-            { text: "Username", flex: 1, dataIndex: "username" },
-            { text: "Password Hash", flex: 1, dataIndex: "passwordHash" },
-            { text: "Estado", flex: 1, dataIndex: "estado" }
+            { 
+                text: "ID", 
+                width: 50, 
+                sortable: false, 
+                hideable: false, 
+                dataIndex: "id" 
+            },
+            { 
+                text: "Username", 
+                flex: 1, 
+                sortable: false, 
+                hideable: false, 
+                dataIndex: "username" 
+            },
+            { 
+                text: "Password Hash", 
+                flex: 1, 
+                sortable: false, 
+                hideable: false, 
+                dataIndex: "passwordHash" 
+            },
+            { 
+                text: "Estado", 
+                flex: 1, 
+                sortable: false, 
+                hideable: false, 
+                dataIndex: "estado" 
+            }
         ]
     });
 

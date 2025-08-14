@@ -13,8 +13,8 @@ const createRolPermissionPanel = () => {
         proxy: {
             type: "rest",
             url: "/Api/rolpermiso.php",
-            reader: { type: 'json', rootProperty: '' },
-            writer: { type: 'json', rootProperty: '', writeAllFields: true },
+            reader: { type: "json", rootProperty: "" },
+            writer: { type: "json", rootProperty: "", writeAllFields: true },
             appendId: false
         },
         autoLoad: true,
@@ -27,8 +27,22 @@ const createRolPermissionPanel = () => {
         itemId: "rolPermisoPanel",
         layout: "fit",
         columns: [
-            { text: "ID Rol", flex: 1, dataIndex: "idRol", align: "center" },
-            { text: "ID Permiso", flex: 1, dataIndex: "idPermiso", align: "center" }
+            { 
+                text: "ID Rol", 
+                flex: 1, 
+                sortable: false, 
+                hideable: false, 
+                dataIndex: "idRol", 
+                align: "center" 
+            },
+            { 
+                text: "ID Permiso", 
+                flex: 1, 
+                sortable: false, 
+                hideable: false, 
+                dataIndex: "idPermiso", 
+                align: "center" 
+            }
         ]
     });
 

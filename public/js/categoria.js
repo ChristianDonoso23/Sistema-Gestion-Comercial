@@ -46,7 +46,7 @@ const createCategoriesPanel = () => {
             },
             {
                 text: "Descripción",
-                flex: 2,
+                flex: 1,
                 sortable: false,
                 hideable: false,
                 dataIndex: "descripcion",

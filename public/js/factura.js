@@ -17,12 +17,12 @@ const createBillPanel = () => {
         proxy: {
             type: "rest",
             url: "/Api/factura.php",
-            reader: { type: "json", rootProperty: '' },
-            writer: { type: "json", rootProperty: '', writeAllFields: true },
+            reader: { type: "json", rootProperty: "" },
+            writer: { type: "json", rootProperty: "", writeAllFields: true },
             appendId: false
         },
         autoLoad: true,
-        autoSync: false,
+        autoSync: false
     });
 
     const grid = Ext.create("Ext.grid.Panel", {
@@ -31,13 +31,51 @@ const createBillPanel = () => {
         itemId: "facturaPanel",
         layout: "fit",
         columns: [
-            { text: "ID", dataIndex: "id", width: 50 },
-            { text: "ID Venta", dataIndex: "idVenta", width: 70 },
-            { text: "Número", dataIndex: "numero", flex: 1 },
-            { text: "Clave de Acceso", dataIndex: "claveAcceso", flex: 2 },
-            { text: "Fecha Emisión", dataIndex: "fechaEmision", flex: 1, xtype: 'datecolumn', format: 'Y-m-d' },
-            { text: "Estado", dataIndex: "estado", flex: 1 }
-        ],
+            { 
+                text: "ID", 
+                width: 50, 
+                sortable: false, 
+                hideable: false, 
+                dataIndex: "id" 
+            },
+            { 
+                text: "ID Venta", 
+                width: 80, 
+                sortable: false, 
+                hideable: false, 
+                dataIndex: "idVenta" 
+            },
+            { 
+                text: "Número", 
+                flex: 1, 
+                sortable: false, 
+                hideable: false, 
+                dataIndex: "numero" 
+            },
+            { 
+                text: "Clave de Acceso", 
+                flex: 1, 
+                sortable: false, 
+                hideable: false, 
+                dataIndex: "claveAcceso" 
+            },
+            { 
+                text: "Fecha Emisión", 
+                flex: 1, 
+                sortable: false, 
+                hideable: false, 
+                dataIndex: "fechaEmision", 
+                xtype: "datecolumn", 
+                format: "Y-m-d" 
+            },
+            { 
+                text: "Estado", 
+                flex: 1, 
+                sortable: false, 
+                hideable: false, 
+                dataIndex: "estado" 
+            }
+        ]
     });
 
     return grid;

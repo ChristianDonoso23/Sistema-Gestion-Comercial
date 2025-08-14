@@ -1,37 +1,30 @@
 Ext.onReady(() => {
-    const categoriesPanel = createCategoriesPanel();
-    const clientsPanel = createClientsPanel();
-    const detailSalesPanel = createDetailSalesPanel();
-    const billPanel = createBillPanel();
-    const permissionPanel = createPermissionPanel();
-    const legalPersonPanel = createLegalPersonPanel();
-    const naturalPersonPanel = createNaturalPersonPanel();
-    const productPanel = createProductPanel();
-    const digitalProductPanel = createDigitalProductPanel();
-    const physicalProductPanel = createPhysicalProductPanel();
-    const rolPanel = createRolPanel();
+   
+    const clientsPanel = createClientsPanel();            
+    const productPanel = createProductsPanel();           
+    const categoriesPanel = createCategoriesPanel();     
+    const salesPanel = createSalesPanel();                
+    const detailSalesPanel = createDetailSalesPanel();    
+    const billPanel = createBillPanel();                  
+    const usersPanel = createUsersPanel();                
+    const rolPanel = createRolPanel();                    
+    const permissionPanel = createPermissionPanel();      
     const rolPermissionPanel = createRolPermissionPanel();
-    const usersPanel = createUsersPanel();
-    const salesPanel = createSalesPanel();
 
     const mainCard = Ext.create('Ext.panel.Panel', {
         region: 'center',
         layout: 'card',
         items: [
-            categoriesPanel,
             clientsPanel,
+            productPanel,
+            categoriesPanel,
+            salesPanel,
             detailSalesPanel,
             billPanel,
-            permissionPanel,
-            legalPersonPanel,
-            naturalPersonPanel,
-            productPanel,
-            digitalProductPanel,
-            physicalProductPanel,
-            rolPanel,
-            rolPermissionPanel,
             usersPanel,
-            salesPanel
+            rolPanel,
+            permissionPanel,
+            rolPermissionPanel
         ],
     });
 
@@ -42,22 +35,47 @@ Ext.onReady(() => {
             {
                 region: 'north',
                 xtype: 'toolbar',
-                scrollable: 'x',
                 items: [
-                    { text: 'Categorías', handler: () => mainCard.getLayout().setActiveItem(categoriesPanel) },
-                    { text: 'Clientes', handler: () => mainCard.getLayout().setActiveItem(clientsPanel) },
-                    { text: 'Detalle Venta', handler: () => mainCard.getLayout().setActiveItem(detailSalesPanel) },
-                    { text: 'Facturas', handler: () => mainCard.getLayout().setActiveItem(billPanel) },
-                    { text: 'Permisos', handler: () => mainCard.getLayout().setActiveItem(permissionPanel) },
-                    { text: 'Persona Jurídica', handler: () => mainCard.getLayout().setActiveItem(legalPersonPanel) },
-                    { text: 'Persona Natural', handler: () => mainCard.getLayout().setActiveItem(naturalPersonPanel) },
-                    { text: 'Productos', handler: () => mainCard.getLayout().setActiveItem(productPanel) },
-                    { text: 'Producto Digital', handler: () => mainCard.getLayout().setActiveItem(digitalProductPanel) },
-                    { text: 'Producto Físico', handler: () => mainCard.getLayout().setActiveItem(physicalProductPanel) },
-                    { text: 'Roles', handler: () => mainCard.getLayout().setActiveItem(rolPanel) },
-                    { text: 'Rol Permisos', handler: () => mainCard.getLayout().setActiveItem(rolPermissionPanel) },
-                    { text: 'Usuarios', handler: () => mainCard.getLayout().setActiveItem(usersPanel) },
-                    { text: 'Ventas', handler: () => mainCard.getLayout().setActiveItem(salesPanel) }
+                    { 
+                        text: 'Clientes', 
+                        handler: () => mainCard.getLayout().setActiveItem(clientsPanel) 
+                    },
+                    { 
+                        text: 'Productos', 
+                        handler: () => mainCard.getLayout().setActiveItem(productPanel) 
+                    },
+                    { 
+                        text: 'Categorías', 
+                        handler: () => mainCard.getLayout().setActiveItem(categoriesPanel) 
+                    },
+                    { 
+                        text: 'Ventas', 
+                        handler: () => mainCard.getLayout().setActiveItem(salesPanel) 
+                    },
+                    { 
+                        text: 'Detalle Venta', 
+                        handler: () => mainCard.getLayout().setActiveItem(detailSalesPanel) 
+                    },
+                    { 
+                        text: 'Facturas', 
+                        handler: () => mainCard.getLayout().setActiveItem(billPanel) 
+                    },
+                    { 
+                        text: 'Usuarios', 
+                        handler: () => mainCard.getLayout().setActiveItem(usersPanel) 
+                    },
+                    { 
+                        text: 'Roles', 
+                        handler: () => mainCard.getLayout().setActiveItem(rolPanel) 
+                    },
+                    { 
+                        text: 'Permisos', 
+                        handler: () => mainCard.getLayout().setActiveItem(permissionPanel) 
+                    },
+                    { 
+                        text: 'Rol Permisos', 
+                        handler: () => mainCard.getLayout().setActiveItem(rolPermissionPanel)
+                    }
                 ]
             },
             mainCard

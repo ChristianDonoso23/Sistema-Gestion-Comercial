@@ -87,6 +87,6 @@ const createCategoriesPanel = () => {
             }
         ]
     });
-
+//subir 
     return grid;
 };

@@ -6,7 +6,7 @@ const createCategoriesPanel = () => {
             { name: "nombre", type: "string" },
             { name: "descripcion", type: "string" },
             { name: "estado", type: "string" },
-            { name: "idPadre", type: "int", allowNull: true } 
+            { name: "idPadre", type: "int", allowNull: true }
         ]
     });
 
@@ -66,6 +66,26 @@ const createCategoriesPanel = () => {
                 dataIndex: "idPadre",
             }
         ],
+        tbar: [
+            {
+                text: 'Eliminar',
+                handler() {
+                    const rec = this.up('grid').getSelection()[0];
+                    if (!rec) {
+                        return Ext.Msg.alert('Atencion', 'Seleccione una categoría para eliminar.');
+                    }
+                    Ext.Msg.confirm('Confirmar', '¿Esta seguro de que desea eliminar esta categoria?', btn => {
+                        if (btn === 'yes') {
+                            categoriaStore.remove(rec);                            
+                            categoriaStore.sync({
+                                success: () => Ext.Msg.alert('Éxito', 'Categoría eliminada correctamente.'),
+                                failure: () => Ext.Msg.alert('Error', 'No se pudo eliminar la categoría.')
+                            });
+                        }
+                    });
+                }
+            }
+        ]
     });
 
     return grid;

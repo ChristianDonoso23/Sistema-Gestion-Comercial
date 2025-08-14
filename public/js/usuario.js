@@ -57,6 +57,25 @@ const createUsersPanel = () => {
                 hideable: false, 
                 dataIndex: "estado" 
             }
+        ],
+        tbar: [
+            {
+                text: 'Eliminar Usuario',
+                handler() {
+                    const rec = this.up('grid').getSelection()[0];
+                    if (!rec) return Ext.Msg.alert('Atención', 'Seleccione un Usuario para eliminar.');
+
+                    Ext.Msg.confirm('Confirmar', '¿Está seguro de que desea eliminar el siguiente Usuario?', btn => {
+                        if (btn === 'yes') {
+                            userStore.remove(rec);
+                            userStore.sync({
+                                success: () => Ext.Msg.alert('Éxito', 'Usuario eliminada correctamente.'),
+                                failure: () => Ext.Msg.alert('Error', 'No se pudo eliminar el Usuario.')
+                            });
+                        }
+                    });
+                }
+            }
         ]
     });
 

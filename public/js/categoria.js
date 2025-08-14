@@ -68,7 +68,7 @@ const createCategoriesPanel = () => {
         ],
         tbar: [
             {
-                text: 'Eliminar',
+                text: 'Eliminar Categoría',
                 handler() {
                     const rec = this.up('grid').getSelection()[0];
                     if (!rec) {

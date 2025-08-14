@@ -27,21 +27,40 @@ const createRolPermissionPanel = () => {
         itemId: "rolPermisoPanel",
         layout: "fit",
         columns: [
-            { 
-                text: "ID Rol", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "idRol", 
-                align: "center" 
+            {
+                text: "ID Rol",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "idRol",
+                align: "center"
             },
-            { 
-                text: "ID Permiso", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "idPermiso", 
-                align: "center" 
+            {
+                text: "ID Permiso",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "idPermiso",
+                align: "center"
+            }
+        ],
+        tbar: [
+            {
+                text: 'Eliminar Rol-Permiso',
+                handler() {
+                    const rec = this.up('grid').getSelection()[0];
+                    if (!rec) return Ext.Msg.alert('Atención', 'Seleccione un Rol-Permiso para eliminar.');
+
+                    Ext.Msg.confirm('Confirmar', '¿Está seguro de que desea eliminar el siguiente Rol-Permiso?', btn => {
+                        if (btn === 'yes') {
+                            permisoStore.remove(rec);
+                            permisoStore.sync({
+                                success: () => Ext.Msg.alert('Éxito', 'Rol-Permiso eliminado correctamente.'),
+                                failure: () => Ext.Msg.alert('Error', 'No se pudo eliminar el Rol-Permiso.')
+                            });
+                        }
+                    });
+                }
             }
         ]
     });

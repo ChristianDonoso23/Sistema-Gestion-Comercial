@@ -32,7 +32,7 @@ const createProductsPanel = () => {
         model: "App.model.Producto",
         autoLoad: true,
         proxy: {
-            type: "ajax",
+            type: "rest",
             url: "Api/producto.php",
             reader: {
                 type: "json",
@@ -64,78 +64,96 @@ const createProductsPanel = () => {
                     productoStore.clearFilter();
                     productoStore.filterBy(rec => rec.get("tipo") === "ProductoDigital");
                 }
-            }
+            },
+            {
+                text: 'Eliminar Producto',
+                handler() {
+                    const rec = this.up('grid').getSelection()[0];
+                    if (!rec) return Ext.Msg.alert('Atención', 'Seleccione un producto para eliminar.');
+
+                    Ext.Msg.confirm('Confirmar', '¿Está seguro de que desea eliminar este producto?', btn => {
+                        if (btn === 'yes') {
+                            productoStore.remove(rec);
+                            productoStore.sync({
+                                success: () => Ext.Msg.alert('Éxito', 'Producto eliminado correctamente.'),
+                                failure: () => Ext.Msg.alert('Error', 'No se pudo eliminar el producto.')
+                            });
+                        }
+                    });
+                }
+            },
+
         ],
         columns: [
-            { 
-                text: "ID", 
-                width: 40, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "id" 
+            {
+                text: "ID",
+                width: 40,
+                sortable: false,
+                hideable: false,
+                dataIndex: "id"
             },
-            { 
-                text: "Tipo", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "tipo" 
+            {
+                text: "Tipo",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "tipo"
             },
-            { 
-                text: "Nombre", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "nombre" 
+            {
+                text: "Nombre",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "nombre"
             },
-            { 
-                text: "Descripción", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "descripcion" 
+            {
+                text: "Descripción",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "descripcion"
             },
-            { 
-                text: "Precio Unitario", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "precioUnitario" 
+            {
+                text: "Precio Unitario",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "precioUnitario"
             },
-            { 
-                text: "Stock", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "stock" 
+            {
+                text: "Stock",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "stock"
             },
-            { 
-                text: "Categoría", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "idCategoria" 
+            {
+                text: "Categoría",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "idCategoria"
             },
-            { 
-                text: "Dimensiones / Peso", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "dimensiones" 
+            {
+                text: "Dimensiones / Peso",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "dimensiones"
             },
-            { 
-                text: "URL Descarga", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "urlDescarga" 
+            {
+                text: "URL Descarga",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "urlDescarga"
             },
-            { 
-                text: "Licencia", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "licencia" 
+            {
+                text: "Licencia",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "licencia"
             }
         ]
     });

@@ -27,21 +27,40 @@ const createPermissionPanel = () => {
         itemId: "permisoPanel",
         layout: "fit",
         columns: [
-            { 
-                text: "ID", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "id", 
-                align: "center" 
+            {
+                text: "ID",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "id",
+                align: "center"
             },
-            { 
-                text: "Código", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "codigo", 
-                align: "center" 
+            {
+                text: "Código",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "codigo",
+                align: "center"
+            }
+        ],
+        tbar: [
+            {
+                text: 'Eliminar Permiso',
+                handler() {
+                    const rec = this.up('grid').getSelection()[0];
+                    if (!rec) return Ext.Msg.alert('Atención', 'Seleccione un Permiso para eliminar.');
+
+                    Ext.Msg.confirm('Confirmar', '¿Está seguro de que desea eliminar el siguiente Permiso?', btn => {
+                        if (btn === 'yes') {
+                            permisoStore.remove(rec);
+                            permisoStore.sync({
+                                success: () => Ext.Msg.alert('Éxito', 'Permiso eliminado correctamente.'),
+                                failure: () => Ext.Msg.alert('Error', 'No se pudo eliminar el Permiso.')
+                            });
+                        }
+                    });
+                }
             }
         ]
     });

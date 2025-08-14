@@ -31,51 +31,70 @@ const createDetailSalesPanel = () => {
         itemId: "detailSalesPanel",
         layout: "fit",
         columns: [
-            { 
-                text: "ID Venta", 
-                width: 80, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "idVenta" 
+            {
+                text: "ID Venta",
+                width: 80,
+                sortable: false,
+                hideable: false,
+                dataIndex: "idVenta"
             },
-            { 
-                text: "Linea", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "lineNumber" 
+            {
+                text: "Linea",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "lineNumber"
             },
-            { 
-                text: "ID Producto", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "idProducto" 
+            {
+                text: "ID Producto",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "idProducto"
             },
-            { 
-                text: "Cantidad", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "cantidad" 
+            {
+                text: "Cantidad",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "cantidad"
             },
-            { 
-                text: "Precio Unitario", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "precioUnitario", 
-                xtype: "numbercolumn", 
-                format: "0.00" 
+            {
+                text: "Precio Unitario",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "precioUnitario",
+                xtype: "numbercolumn",
+                format: "0.00"
             },
-            { 
-                text: "Subtotal", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "subtotal", 
-                xtype: "numbercolumn", 
-                format: "0.00" 
+            {
+                text: "Subtotal",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "subtotal",
+                xtype: "numbercolumn",
+                format: "0.00"
+            }
+        ],
+        tbar: [
+            {
+                text: 'Eliminar Detalle de Venta',
+                handler() {
+                    const rec = this.up('grid').getSelection()[0];
+                    if (!rec) return Ext.Msg.alert('Atención', 'Seleccione un detalle para eliminar.');
+
+                    Ext.Msg.confirm('Confirmar', '¿Está seguro de que desea eliminar el siguiente detalle de venta?', btn => {
+                        if (btn === 'yes') {
+                            detailSalesStore.remove(rec);
+                            detailSalesStore.sync({
+                                success: () => Ext.Msg.alert('Éxito', 'Detalle de venta eliminada correctamente.'),
+                                failure: () => Ext.Msg.alert('Error', 'No se pudo eliminar el detalle de venta.')
+                            });
+                        }
+                    });
+                }
             }
         ]
     });

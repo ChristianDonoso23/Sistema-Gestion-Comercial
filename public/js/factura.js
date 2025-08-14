@@ -31,49 +31,68 @@ const createBillPanel = () => {
         itemId: "facturaPanel",
         layout: "fit",
         columns: [
-            { 
-                text: "ID", 
-                width: 50, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "id" 
+            {
+                text: "ID",
+                width: 50,
+                sortable: false,
+                hideable: false,
+                dataIndex: "id"
             },
-            { 
-                text: "ID Venta", 
-                width: 80, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "idVenta" 
+            {
+                text: "ID Venta",
+                width: 80,
+                sortable: false,
+                hideable: false,
+                dataIndex: "idVenta"
             },
-            { 
-                text: "Número", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "numero" 
+            {
+                text: "Número",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "numero"
             },
-            { 
-                text: "Clave de Acceso", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "claveAcceso" 
+            {
+                text: "Clave de Acceso",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "claveAcceso"
             },
-            { 
-                text: "Fecha Emisión", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "fechaEmision", 
-                xtype: "datecolumn", 
-                format: "Y-m-d" 
+            {
+                text: "Fecha Emisión",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "fechaEmision",
+                xtype: "datecolumn",
+                format: "Y-m-d"
             },
-            { 
-                text: "Estado", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "estado" 
+            {
+                text: "Estado",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "estado"
+            }
+        ],
+        tbar: [
+            {
+                text: 'Eliminar Factura',
+                handler() {
+                    const rec = this.up('grid').getSelection()[0];
+                    if (!rec) return Ext.Msg.alert('Atención', 'Seleccione una Factura para eliminar.');
+
+                    Ext.Msg.confirm('Confirmar', '¿Está seguro de que desea eliminar la siguiente Factura?', btn => {
+                        if (btn === 'yes') {
+                            facturaStore.remove(rec);
+                            facturaStore.sync({
+                                success: () => Ext.Msg.alert('Éxito', 'Factura eliminada correctamente.'),
+                                failure: () => Ext.Msg.alert('Error', 'No se pudo eliminar la Factura.')
+                            });
+                        }
+                    });
+                }
             }
         ]
     });

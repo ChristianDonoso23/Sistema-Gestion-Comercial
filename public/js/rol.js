@@ -43,6 +43,25 @@ const createRolPanel = () => {
                 dataIndex: "nombre",
                 align: "center"
             }
+        ],
+        tbar: [
+            {
+                text: 'Eliminar Rol',
+                handler() {
+                    const rec = this.up('grid').getSelection()[0];
+                    if (!rec) return Ext.Msg.alert('Atención', 'Seleccione un Rol para eliminar.');
+
+                    Ext.Msg.confirm('Confirmar', '¿Está seguro de que desea eliminar el siguiente Rol?', btn => {
+                        if (btn === 'yes') {
+                            rolStore.remove(rec);
+                            rolStore.sync({
+                                success: () => Ext.Msg.alert('Éxito', 'Rol eliminado correctamente.'),
+                                failure: () => Ext.Msg.alert('Error', 'No se pudo eliminar el Rol.')
+                            });
+                        }
+                    });
+                }
+            }
         ]
     });
 

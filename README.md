@@ -82,7 +82,7 @@ mysql -u root -p Sistema_Gestion_Comercial < src/Sql/SGC(RespaldoBD).sql
    - Inserta cabecera y detalle
    - Descuenta inventario (`sp_descontar_stock`)
 4. Devuelve `idVenta`
-5. Emitir factura → `POST /api/facturas/{idVenta}` → PDF / firma / SRI
+5. Emitir factura → `POST /api/facturas/{idVenta}` 
 
 ---
 

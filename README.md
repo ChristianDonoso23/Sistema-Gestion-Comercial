@@ -55,7 +55,7 @@ git clone https://github.com/ChristianDonoso23/Sistema_Gestion_Comercial.git
 
 #### Opción A – phpMyAdmin
 1. Crea una base de datos llamada `Sistema_Gestion_Comercial`.
-2. Importa el archivo `src/Sql/SGC.sql` desde la pestaña **Importar**.
+2. Importa el archivo `src/Sql/SGC(RespaldoBD).sql` desde la pestaña **Importar**.
 
 #### Opción B – Línea de comandos
 ```bash

@@ -13,15 +13,20 @@ Este sistema permite a pequeñas y medianas empresas administrar de forma eficie
 
 ```
 Sistema_Gestion_Comercial/
-├── public/                # Punto de entrada del cliente
-│   └── index.html
+├── public/
+│   ├── Api/
+│   ├── js/             
+│   └── Index.html         # Punto de entrada del cliente
+│ 
 └── src/
     ├── Config/            # Conexión a la base de datos (Database.php)
     ├── Entities/          # Entidades de negocio
     ├── Interfaces/        # Contratos de repositorios
     ├── Repositories/      # Acceso a datos
     ├── Sql/               # Scripts SQL para base de datos
-    │   └── SGC.sql
+    │   ├─ SGC.sql
+    │   └── SGC(RespaldoBD).sql  #Respaldo para importar en la BD
+    │ 
     └── vendor/            # Dependencias Composer
         ├── autoload.php
         ├── composer.json
@@ -59,7 +64,7 @@ git clone https://github.com/ChristianDonoso23/Sistema_Gestion_Comercial.git
 
 #### Opción B – Línea de comandos
 ```bash
-mysql -u root -p Sistema_Gestion_Comercial < src/Sql/SGC.sql
+mysql -u root -p Sistema_Gestion_Comercial < src/Sql/SGC(RespaldoBD).sql
 ```
 
 ### 4. Levanta los servicios

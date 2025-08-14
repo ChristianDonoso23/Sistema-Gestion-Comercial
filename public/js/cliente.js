@@ -48,7 +48,7 @@ const createClientsPanel = () => {
         model: "App.model.Cliente",
         autoLoad: true,
         proxy: {
-            type: "ajax",
+            type: "rest",
             url: "Api/cliente.php",
             reader: {
                 type: "json",
@@ -82,68 +82,86 @@ const createClientsPanel = () => {
                     clientStore.clearFilter();
                     clientStore.filterBy(rec => rec.get("tipo") === "PersonaJuridica");
                 }
+            },
+            {
+                text: "Eliminar Cliente",
+                handler() {
+                    const rec = this.up('grid').getSelection()[0];
+                    if (!rec) return Ext.Msg.alert('Atención', 'Seleccione un cliente para eliminar.');
+
+                    Ext.Msg.confirm('Confirmar', '¿Está seguro de que desea eliminar este cliente?', btn => {
+                        if (btn === 'yes') {
+                            clientStore.remove(rec);
+                            clientStore.sync({
+                                success: () => Ext.Msg.alert('Éxito', 'Cliente eliminado correctamente.'),
+                                failure: () => Ext.Msg.alert('Error', 'No se pudo eliminar el cliente.')
+                            });
+                        }
+                    });
+                }
             }
         ],
         columns: [
-            { 
-                text: "ID", 
-                width: 40, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "id" 
+            {
+                text: "ID",
+                width: 40,
+                sortable: false,
+                hideable: false,
+                dataIndex: "id"
             },
-            { 
-                text: "Tipo", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "tipo" 
+            {
+                text: "Tipo",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "tipo"
             },
-            { 
-                text: "Email", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "email" 
+            {
+                text: "Email",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "email"
             },
-            { 
-                text: "Teléfono", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "telefono" 
+            {
+                text: "Teléfono",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "telefono"
             },
-            { 
-                text: "Dirección", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "direccion" 
+            {
+                text: "Dirección",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "direccion"
             },
-            { 
-                text: "Nombre/Empresa", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "nombreCompleto" 
+            {
+                text: "Nombre/Empresa",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "nombreCompleto"
             },
-            { 
-                text: "Identificación", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "identificacion" 
+            {
+                text: "Identificación",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "identificacion"
             },
-            { 
-                text: "Representante Legal", 
-                flex: 1, 
-                sortable: false, 
-                hideable: false, 
-                dataIndex: "representanteLegal" 
+            {
+                text: "Representante Legal",
+                flex: 1,
+                sortable: false,
+                hideable: false,
+                dataIndex: "representanteLegal"
             }
-        ]
+        ],
+
     });
-    
+
     return grid;
 };
 
